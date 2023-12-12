@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>About Us</title>
+        <title>Contact Us</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -18,16 +18,20 @@
                   <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars</a>
             </div>
             <ul>
-                <a class="btn btn-link" href="#">About Us</a>
+                <a class="btn btn-link" href="{% url 'djangoapp:about' %}">About Us</a>
             </ul>
-            
+
         </div>
     </nav>
     <div class="container-fluid">
-        <p class="h5">About Best Cars</p>
+        <p class="h5">Contact Best Cars</p>
         <hr class="hr" />
-        <p class="display-5">Welcome to Best Cars dealership, home to the best cars in North America. We sell domestic and imported cars at reasonable prices.</p>
-
+        <address>
+            <strong>RMZ InfoTech</strong><br/>
+            40 MGR Road<br/>
+            Delhi 700 096<br/>
+            +1 (855) 747 7878 | dealership@bestcars.com<br/>
+        </address>
     </div>
     <!--Navbar Footer-->
     <nav class="navbar navbar-light bg-light">
