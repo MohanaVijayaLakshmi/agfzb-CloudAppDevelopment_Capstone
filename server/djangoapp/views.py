@@ -50,9 +50,9 @@ def login_request(request):
             return redirect('djangoapp:index')
         else:
             # If not, return to login page again
-            return render(request, 'djangoapp/user_login.html', context)
+            return render(request, 'djangoapp/registration.html', context)
     else:
-        return render(request, 'djangoapp/user_login.html', context)
+        return render(request, 'djangoapp/registration.html', context)
 # Create a `logout_request` view to handle sign out request
 # def logout_request(request):
 # ...
@@ -68,8 +68,33 @@ def logout_request(request):
 # ...
 def registration_request(request):
     context = {}
-    if request.method == "POST":
-        return render(request, 'djangoapp/contact.html', context)
+    if request.method == "GET":
+        return render(request, 'djangoapp/registration.html', context)
+    elif request.method == 'POST':
+        user_exist = False
+        # Get username and password from request.POST dictionary
+        username = request.POST['username']
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+        password = request.POST['psw']
+        try:
+            # Check if user already exists
+            User.objects.get(username=username)
+            user_exist = True
+        except:
+            # If not, simply log this is a new user
+            logger.debug("{} is new user".format(username))
+        # If it is a new user
+        if not user_exist:
+            # Create user in auth_user table
+            user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,
+                                            password=password)
+            # <HINT> Login the user and 
+            # redirect to course list page
+            return redirect("djangoapp:index")
+        else:
+            return render(request, 'djangoapp/registration.html', context)
+
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
     context = {}
