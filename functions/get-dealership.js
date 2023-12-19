@@ -56,10 +56,6 @@ app.get('/api/dealership',(req,res)=>{
     })
 })
 
-app.get('/api/review',(req,res)=>{
-    const { dealerId } = req.query;
-})
-
 // Define a route to get all dealerships with optional state and ID filters
 app.get('/dealerships/get', (req, res) => {
     const { state, id } = req.query;
