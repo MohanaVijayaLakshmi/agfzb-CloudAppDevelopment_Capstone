@@ -34,7 +34,7 @@ app.get('/api/dealership',(req,res)=>{
     if (state) {
         selector.state = state;
     }else{
-        res.status(404).json({error: 'The state does not exist'});
+        return res.status(404).json({error: 'The state does not exist'});
     }
 
     const queryOptions = {
@@ -43,14 +43,14 @@ app.get('/api/dealership',(req,res)=>{
 
     db.find(queryOptions,(err,body)=>{
         if(err){
-            res.status(500).json({error:'Something went wrong on the server'})
+            return res.status(500).json({error:'Something went wrong on the server'})
         }else{
-            
-            const dealerships =  body;
+            //console.log(body.docs);
+            const dealerships =  body.docs;
             if(dealerships.length == 0){
-                res.status(404).json({error: 'Database is empty'});
+                return res.status(404).json({error: 'Database is empty'});
             }
-            res.json(dealerships);
+            return res.json(dealerships);
         }
         
     })
