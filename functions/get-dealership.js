@@ -78,10 +78,10 @@ app.get('/dealerships/get', (req, res) => {
     db.find(queryOptions, (err, body) => {
         if (err) {
             console.error('Error fetching dealerships:', err);
-            res.status(500).json({ error: 'An error occurred while fetching dealerships.' });
+            return res.status(500).json({ error: 'An error occurred while fetching dealerships.' });
         } else {
             const dealerships = body.docs;
-            res.json(dealerships);
+            return res.json(dealerships);
         }
     });
 });
