@@ -120,8 +120,8 @@ def get_dealer_details(request, id):
 
         review_url = "http://127.0.0.1:5000/api/get_reviews"
         reviews = get_dealer_reviews_from_cf(review_url, id = id)
-      #  for review in reviews:
-       #     print ("sentiment", review.sentiment)
+        for review in reviews:
+            print ("sentiment", review.sentiment)
         print("REVIEWS:", reviews)
         context['reviews'] = reviews
 
