@@ -14,9 +14,9 @@ print('Databases:', client.all_dbs())
 db = client['reviews']
 app = Flask(__name__)
 
-@app.route('/api/review', methods=['GET'])
+@app.route('/api/get_reviews', methods=['GET'])
 def get_reviews():
-    dealership_id = request.args.get('dealerId')
+    dealership_id = request.args.get('id')
     # Check if "id" parameter is missing
     if dealership_id is None:
         return jsonify({"error": "Missing 'id' parameter in the URL"}), 400
