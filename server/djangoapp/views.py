@@ -10,6 +10,7 @@ from datetime import datetime
 import logging
 import json
 from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf 
+from .models import CarModel
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -147,6 +148,7 @@ def add_review(request, id):
         # print('post')
         if request.user.is_authenticated:
             username = request.user.username
+            print("POST fields: ")
             print(request.POST)
             payload = dict()
             car_id = request.POST["car"]
@@ -182,6 +184,7 @@ def add_review(request, id):
             review=json.dumps(review,default=str)
             new_payload1 = {}
             new_payload1["review"] = review
+            print("Review payload")
             print("\nREVIEW:",review)
             post_request(review_post_url, review, id = id)
         return redirect("djangoapp:dealer_details", id = id)
