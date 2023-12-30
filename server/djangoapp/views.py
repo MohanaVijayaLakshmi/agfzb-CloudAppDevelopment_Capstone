@@ -145,30 +145,10 @@ def add_review(request, id):
         return render(request, 'djangoapp/add_review.html', context)
     
     if request.method == 'POST':
-        # print('post')
         if request.user.is_authenticated:
-            username = request.user.username
-            print("POST fields: ")
-            print(request.POST)
-            payload = dict()
             car_id = request.POST["car"]
             car = CarModel.objects.get(pk=car_id)
-            payload["time"] = datetime.utcnow().isoformat()
-            payload["name"] = username
-            payload["dealership"] = id
-            payload["id"] = id
-            payload["review"] = request.POST["content"]
-            payload["purchase"] = False
-            if "purchasecheck" in request.POST:
-                if request.POST["purchasecheck"] == 'on':
-                    payload["purchase"] = True
-            payload["purchase_date"] = request.POST["purchasedate"]
-            payload["car_make"] = car.make.name
-            payload["car_model"] = car.name
-            payload["car_year"] = int(car.year.strftime("%Y"))
-            new_payload = {}
-            new_payload["review"] = payload
-            review_post_url = "http://127.0.0.1:5000/api/post_review"
+            review_post_url = "https://mohanalakshm-5000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/post_review"
             review = {
                 "id":id,
                 "time":datetime.utcnow().isoformat(),
@@ -182,9 +162,9 @@ def add_review(request, id):
                 "car_year": int(car.year.strftime("%Y")),  # Extract car year from POST
             }
             review=json.dumps(review,default=str)
+            print("\nReview before new payload: ",review)
             new_payload1 = {}
             new_payload1["review"] = review
-            print("Review payload")
-            print("\nREVIEW:",review)
+            print("\nREVIEW123:")
             post_request(review_post_url, review, id = id)
         return redirect("djangoapp:dealer_details", id = id)
