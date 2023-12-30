@@ -100,7 +100,7 @@ def registration_request(request):
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
     if request.method == "GET":
-        url = "http://127.0.0.1:3000/dealerships/get"
+        url = "https://mohanalakshm-3000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
         dealerships = get_dealers_from_cf(url)
         
         context = {}
@@ -115,11 +115,11 @@ def get_dealerships(request):
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "http://127.0.0.1:3000/dealerships/get"
+        dealer_url = "https://mohanalakshm-3000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
         dealer = get_dealer_by_id_from_cf(dealer_url, id = id)
         context['dealer'] = dealer
 
-        review_url = "http://127.0.0.1:5000/api/get_reviews"
+        review_url = "https://mohanalakshm-5000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/get_reviews"
         reviews = get_dealer_reviews_from_cf(review_url, id = id)
         for review in reviews:
             print ("sentiment", review.sentiment)
@@ -134,7 +134,7 @@ def get_dealer_details(request, id):
 # ...
 def add_review(request, id):
     context = {}
-    url = "http://127.0.0.1:3000/dealerships/get"
+    url = "https://mohanalakshm-3000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
     dealer = get_dealer_by_id_from_cf(url, id=id)
     context["dealer"] = dealer
 
