@@ -9,7 +9,7 @@ from django.contrib import messages
 from datetime import datetime
 import logging
 import json
-from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf 
+from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request 
 from .models import CarModel
 
 # Get an instance of a logger
@@ -163,7 +163,7 @@ def add_review(request, id):
                 if request.POST["purchasecheck"] == 'on':
                     payload["purchase"] = True
             payload["purchase_date"] = request.POST["purchasedate"]
-            payload["car_make"] = car.carmake.name
+            payload["car_make"] = car.make.name
             payload["car_model"] = car.name
             payload["car_year"] = int(car.year.strftime("%Y"))
             new_payload = {}
@@ -177,7 +177,7 @@ def add_review(request, id):
                 "review": request.POST["content"],  # Extract the review from the POST request
                 "purchase": True,  # Extract purchase info from POST
                 "purchase_date":request.POST["purchasedate"],  # Extract purchase date from POST
-                "car_make": car.carmake.name,  # Extract car make from POST
+                "car_make": car.make.name,  # Extract car make from POST
                 "car_model": car.name,  # Extract car model from POST
                 "car_year": int(car.year.strftime("%Y")),  # Extract car year from POST
             }

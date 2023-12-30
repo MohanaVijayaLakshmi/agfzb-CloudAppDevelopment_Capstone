@@ -39,7 +39,7 @@ def get_reviews():
     # Return the data as JSON
     return jsonify(data_list)
 
-@app.route('/api/review', methods=['POST'])
+@app.route('/api/post_review', methods=['POST'])
 def post_review():
     if not request.json:
         return jsonify({"description": 'Invalid JSON data'}), 400
